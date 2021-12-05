@@ -1,0 +1,67 @@
+.LessonBox {
+  width: 300px;
+  height: 350px;
+  background-color: var(--bg-4);
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: var(--txt-1);
+}
+
+.LessonBoxImage {
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  font-size: 14px;
+  width: 100%;
+  height: 200px;
+  background-position: center;
+  background-size: 100%;
+  transition: 0.3s;
+  padding: 8px;
+  text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.486);
+}
+
+.LessonBoxImage span {
+  margin-left: 10px;
+}
+
+.LessonBox:hover .LessonBoxImage {
+  background-size: 120%;
+}
+
+.LessonBoxDetail {
+  display: flex;
+  flex-direction: column;
+  padding: 8px;
+  flex: 1;
+}
+
+.LessonBoxTitle {
+  margin: 5px 0;
+  font-size: 19px;
+}
+
+.LessonBoxDescription {
+  margin: 0;
+  color: var(--txt-2);
+  font-size: 14px;
+}
+
+.LessonBoxStats {
+  display: flex;
+  align-items: flex-end;
+  font-size: 14px;
+  flex: 1;
+  justify-content: flex-end;
+}
+
+.LessonBoxAction {
+  color: var(--primary);
+  display: inline-flex;
+  align-items: center;
+}
+
+.LessonBoxAction svg {
+  margin-left: 5px;
+}

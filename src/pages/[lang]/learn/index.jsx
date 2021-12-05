@@ -2,32 +2,38 @@ import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import { useIntl } from 'react-intl';
 
+import Header from 'src/components/Header';
+import Footer from 'src/components/Footer';
+import LessonBox from 'src/components/LessonBox';
+
 import { defaultLocale, locales } from 'src/localization';
+
+import lessons from 'src/data/lessons.json';
 
 const LearnPage = dynamic(import('src/components/LearnPage'), { ssr: false });
 
 export default function Learn() {
   const { formatMessage } = useIntl();
 
-  // Due to static generation, this page is detected as empty by google bots,
-  // so there is a check here.
-  const isClient = !(typeof window === 'undefined');
-
   return (
     <>
+      <Header />
       <Head>
         <title>{formatMessage({ id: 'page.learn.title' })}</title>
         <link rel="canonical" href="https://regexlearn.com/learn" />
         <meta name="description" content={formatMessage({ id: 'page.learn.description' })} />
         <link rel="stylesheet" href="/css/animate.css" />
       </Head>
-      {!isClient && (
-        <div>
-          <h1>{formatMessage({ id: 'steps.whatIsRegex.title' })}</h1>
-          <p>{formatMessage({ id: 'steps.whatIsRegex.description' })}</p>
+      <div className="container">
+        <div className="row">
+          <div className="col-xs-12">
+            {lessons.map(lesson => (
+              <LessonBox key={lesson.key} data={lesson} />
+            ))}
+          </div>
         </div>
-      )}
-      <LearnPage />
+      </div>
+      <Footer />
     </>
   );
 }

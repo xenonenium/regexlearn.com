@@ -5,7 +5,7 @@ import Link from 'next/link';
 import * as styles from './LanguageSwitch.module.css';
 import Icon from 'src/components/Icon';
 
-import langs, { langNames } from 'src/localization';
+import langs, { defaultLocale, langNames } from 'src/localization';
 import { Context } from 'src/contexts/LanguageContext';
 import getIntlPath from 'src/utils/getIntlPath';
 
@@ -17,7 +17,16 @@ const langList = Object.keys(langs).map(langKey => ({
 const LanguageSwitch = () => {
   const { lang } = useContext(Context);
   const [isOpen, setIsOpen] = useState(false);
-  const { pathname } = useRouter();
+  const {
+    pathname,
+    query: { lang: queryLang, ...queries },
+  } = useRouter();
+
+  let path = pathname;
+
+  Object.keys(queries).forEach(key => {
+    path = path.replace(`[${key}]`, queries[key]);
+  });
 
   const toggleLanguageList = () => {
     setIsOpen(!isOpen);
@@ -45,7 +54,7 @@ const LanguageSwitch = () => {
         style={{ visibility: isOpen ? 'visible' : 'hidden' }}
       >
         {getAvailableList().map(({ label, value }) => (
-          <Link href={getIntlPath(pathname, value)} key={value}>
+          <Link href={getIntlPath(path, value)} key={value}>
             <a onClick={closeLanguageList} className={styles.LanguageSwitchListItem}>
               <span>{label}</span>
             </a>

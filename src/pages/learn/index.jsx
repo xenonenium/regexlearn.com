@@ -1,4 +1,4 @@
-import LearnPage from './[lang]/learn';
+import LearnPage from '../[lang]/learn';
 
 export default LearnPage;
 
