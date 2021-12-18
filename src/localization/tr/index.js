@@ -5,9 +5,9 @@ import learn from './learn.json';
 import lessons from './lessons.json';
 
 const messages = {
+  ...cheatsheet,
   ...general,
   ...landing,
-  ...cheatsheet,
   ...learn,
   ...lessons,
 };
