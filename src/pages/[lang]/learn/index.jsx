@@ -1,4 +1,3 @@
-import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import { useIntl } from 'react-intl';
 
@@ -9,8 +8,6 @@ import LessonBox from 'src/components/LessonBox';
 import { defaultLocale, locales } from 'src/localization';
 
 import lessons from 'src/data/lessons.json';
-
-const LearnPage = dynamic(import('src/components/LearnPage'), { ssr: false });
 
 export default function Learn() {
   const { formatMessage } = useIntl();
@@ -26,10 +23,13 @@ export default function Learn() {
       </Head>
       <div className="container">
         <div className="row">
-          <div className="col-xs-12">
-            {lessons.map(lesson => (
-              <LessonBox key={lesson.key} data={lesson} />
-            ))}
+          {lessons.map(lesson => (
+            <div key={lesson.key} className="col-xs-12 col-sm-4 col-md-3">
+              <LessonBox data={lesson} />
+            </div>
+          ))}
+          <div className="col-xs-12 col-sm-4 col-md-3">
+            <LessonBox lock data={{ title: 'Soon', description: 'Soon' }} />
           </div>
         </div>
       </div>
